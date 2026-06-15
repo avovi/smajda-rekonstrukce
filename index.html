@@ -69,7 +69,22 @@
   .price-table tbody tr:nth-child(even) { background: var(--concrete-light); }
   .price-table tbody td { padding: 0.6rem 1rem; font-size: 0.88rem; }
   .price-table tbody td:not(:first-child) { text-align: right; font-weight: 700; color: var(--brick-dark); font-family: 'Bitter', serif; }
+  .price-table tbody td.tbd { color: var(--muted); font-weight: 500; font-style: italic; font-family: 'Inter', sans-serif; text-transform: lowercase; letter-spacing: 0.5px; }
   .price-note { margin-top: 0.8rem; font-size: 0.82rem; color: var(--muted); }
+
+  /* GALERIE */
+  .gallery-section { background: var(--concrete-light); padding: 3rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .gallery-grid { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 1.4rem; }
+  .gallery-pair { background: var(--white); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .gallery-pair-imgs { display: grid; grid-template-columns: 1fr 1fr; }
+  .gallery-photo { position: relative; aspect-ratio: 4 / 3; background: var(--concrete-light); overflow: hidden; }
+  .gallery-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-tag { position: absolute; top: 0.6rem; left: 0.6rem; background: var(--ink); color: var(--paper); font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 2px; font-family: 'Inter', sans-serif; }
+  .gallery-photo.after .gallery-tag { background: var(--brick); }
+  .gallery-photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.8rem; text-align: center; padding: 1rem; }
+  .gallery-caption { padding: 0.8rem 1.1rem; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--border); }
+  .gallery-caption strong { color: var(--ink); }
+  @media (max-width: 560px) { .gallery-pair-imgs { grid-template-columns: 1fr; } }
 
   /* PROCES */
   .process-section { background: var(--white); padding: 3rem 0; }
@@ -119,6 +134,7 @@
     <li><a href="#o-mne">O mně</a></li>
     <li><a href="#sluzby">Služby</a></li>
     <li><a href="#cenik">Ceník</a></li>
+    <li><a href="#galerie">Fotky</a></li>
     <li><a href="#proces">Jak postupuji</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
@@ -192,18 +208,71 @@
   <table class="price-table">
     <thead><tr><th>Služba</th><th>Orientační cena</th></tr></thead>
     <tbody>
-      <tr><td>Osobní obhlídka a nezávazná nabídka</td><td>zdarma</td></tr>
-      <tr><td>Rekonstrukce koupelny (na klíč, malý byt)</td><td>od 90 000 Kč</td></tr>
-      <tr><td>Rekonstrukce koupelny (na klíč, velký rozsah)</td><td>od 150 000 Kč</td></tr>
-      <tr><td>Pokládka dlažby / obkladu</td><td>od 450 Kč/m²</td></tr>
-      <tr><td>Pokládka plovoucí podlahy</td><td>od 250 Kč/m²</td></tr>
-      <tr><td>Malování + drobné štuky</td><td>od 90 Kč/m²</td></tr>
-      <tr><td>Bourací práce a odvoz suti</td><td>od 350 Kč/hod</td></tr>
-      <tr><td>Kompletní rekonstrukce bytu (2+kk)</td><td>od 350 000 Kč</td></tr>
-      <tr><td>Drobné opravy a údržba</td><td>od 450 Kč/hod</td></tr>
+      <tr><td>Osobní obhlídka a nezávazná nabídka</td><td class="tbd">připravujeme</td></tr>
+      <tr><td>Rekonstrukce koupelny (na klíč, malý byt)</td><td class="tbd">připravujeme</td></tr>
+      <tr><td>Rekonstrukce koupelny (na klíč, velký rozsah)</td><td class="tbd">připravujeme</td></tr>
+      <tr><td>Pokládka dlažby / obkladu</td><td class="tbd">připravujeme</td></tr>
+      <tr><td>Pokládka plovoucí podlahy</td><td class="tbd">připravujeme</td></tr>
+      <tr><td>Malování + drobné štuky</td><td class="tbd">připravujeme</td></tr>
+      <tr><td>Bourací práce a odvoz suti</td><td class="tbd">připravujeme</td></tr>
+      <tr><td>Kompletní rekonstrukce bytu (2+kk)</td><td class="tbd">připravujeme</td></tr>
+      <tr><td>Drobné opravy a údržba</td><td class="tbd">připravujeme</td></tr>
     </tbody>
   </table>
-  <p class="price-note">* Ceny jsou orientační a zahrnují práci, materiál se řeší samostatně dle výběru klienta. U menších oprav je minimální účtovaná doba 2 hodiny.</p>
+  <p class="price-note">* Ceník právě připravujeme. Pro orientační cenu vaší zakázky nás kontaktujte – po osobní obhlídce vám zpracujeme nabídku zdarma.</p>
+</div>
+
+<div class="gallery-section">
+  <div class="wrap" id="galerie" style="padding-top:0;padding-bottom:0;">
+    <div class="section-label">Naše práce</div>
+    <h2>Před a po</h2>
+    <p style="color:var(--muted);font-size:0.9rem;">Ukázky z realizovaných zakázek. Fotky postupně doplňujeme.</p>
+    <div class="gallery-grid">
+
+      <div class="gallery-pair">
+        <div class="gallery-pair-imgs">
+          <div class="gallery-photo before">
+            <span class="gallery-tag">Před</span>
+            <img src="1a.jpg" alt="Před rekonstrukcí – foto 1a" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 1a – doplníme</div>'">
+          </div>
+          <div class="gallery-photo after">
+            <span class="gallery-tag">Po</span>
+            <img src="1b.jpg" alt="Po rekonstrukci – foto 1b" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 1b – doplníme</div>'">
+          </div>
+        </div>
+        <div class="gallery-caption"><strong>Realizace 1</strong> – popis zakázky doplníme.</div>
+      </div>
+
+      <div class="gallery-pair">
+        <div class="gallery-pair-imgs">
+          <div class="gallery-photo before">
+            <span class="gallery-tag">Před</span>
+            <img src="2a.jpg" alt="Před rekonstrukcí – foto 2a" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 2a – doplníme</div>'">
+          </div>
+          <div class="gallery-photo after">
+            <span class="gallery-tag">Po</span>
+            <img src="2b.jpg" alt="Po rekonstrukci – foto 2b" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 2b – doplníme</div>'">
+          </div>
+        </div>
+        <div class="gallery-caption"><strong>Realizace 2</strong> – popis zakázky doplníme.</div>
+      </div>
+
+      <div class="gallery-pair">
+        <div class="gallery-pair-imgs">
+          <div class="gallery-photo before">
+            <span class="gallery-tag">Před</span>
+            <img src="3a.jpg" alt="Před rekonstrukcí – foto 3a" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 3a – doplníme</div>'">
+          </div>
+          <div class="gallery-photo after">
+            <span class="gallery-tag">Po</span>
+            <img src="3b.jpg" alt="Po rekonstrukci – foto 3b" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 3b – doplníme</div>'">
+          </div>
+        </div>
+        <div class="gallery-caption"><strong>Realizace 3</strong> – popis zakázky doplníme.</div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <div class="process-section">
