@@ -233,11 +233,11 @@
         <div class="gallery-pair-imgs">
           <div class="gallery-photo before">
             <span class="gallery-tag">Před</span>
-            <img src="1a.jpg" alt="Před rekonstrukcí – foto 1a" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 1a – doplníme</div>'">
+            <img data-base="1a" alt="Před rekonstrukcí – foto 1a">
           </div>
           <div class="gallery-photo after">
             <span class="gallery-tag">Po</span>
-            <img src="1b.jpg" alt="Po rekonstrukci – foto 1b" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 1b – doplníme</div>'">
+            <img data-base="1b" alt="Po rekonstrukci – foto 1b">
           </div>
         </div>
         <div class="gallery-caption"><strong>Realizace 1</strong> – popis zakázky doplníme.</div>
@@ -247,11 +247,11 @@
         <div class="gallery-pair-imgs">
           <div class="gallery-photo before">
             <span class="gallery-tag">Před</span>
-            <img src="2a.jpg" alt="Před rekonstrukcí – foto 2a" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 2a – doplníme</div>'">
+            <img data-base="2a" alt="Před rekonstrukcí – foto 2a">
           </div>
           <div class="gallery-photo after">
             <span class="gallery-tag">Po</span>
-            <img src="2b.jpg" alt="Po rekonstrukci – foto 2b" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 2b – doplníme</div>'">
+            <img data-base="2b" alt="Po rekonstrukci – foto 2b">
           </div>
         </div>
         <div class="gallery-caption"><strong>Realizace 2</strong> – popis zakázky doplníme.</div>
@@ -261,11 +261,11 @@
         <div class="gallery-pair-imgs">
           <div class="gallery-photo before">
             <span class="gallery-tag">Před</span>
-            <img src="3a.jpg" alt="Před rekonstrukcí – foto 3a" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 3a – doplníme</div>'">
+            <img data-base="3a" alt="Před rekonstrukcí – foto 3a">
           </div>
           <div class="gallery-photo after">
             <span class="gallery-tag">Po</span>
-            <img src="3b.jpg" alt="Po rekonstrukci – foto 3b" onerror="this.parentElement.innerHTML='<div class=\'gallery-photo-placeholder\'>Foto 3b – doplníme</div>'">
+            <img data-base="3b" alt="Po rekonstrukci – foto 3b">
           </div>
         </div>
         <div class="gallery-caption"><strong>Realizace 3</strong> – popis zakázky doplníme.</div>
@@ -274,6 +274,31 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Pro každý obrázek galerie zkusíme více přípon (jpg, JPG, jpeg, JPEG, png, PNG, webp).
+  // Pokud žádná neexistuje, zobrazíme placeholder "doplníme".
+  document.querySelectorAll('#galerie img[data-base]').forEach(function (img) {
+    var base = img.getAttribute('data-base');
+    var exts = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'webp'];
+    var i = 0;
+
+    function tryNext() {
+      if (i >= exts.length) {
+        var ph = document.createElement('div');
+        ph.className = 'gallery-photo-placeholder';
+        ph.textContent = 'Foto ' + base + ' – doplníme';
+        img.replaceWith(ph);
+        return;
+      }
+      img.src = base + '.' + exts[i];
+      i++;
+    }
+
+    img.addEventListener('error', tryNext);
+    tryNext();
+  });
+</script>
 
 <div class="process-section">
   <div class="wrap" id="proces" style="padding-top:0;padding-bottom:0;">
