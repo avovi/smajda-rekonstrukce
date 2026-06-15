@@ -118,6 +118,19 @@
 
   footer { text-align: center; padding: 1.2rem; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--border); background: var(--paper); }
 
+  /* RECENZE */
+  .reviews-section { background: var(--white); padding: 3rem 0; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.4rem; }
+  .review-card { background: var(--brick-light); border: 1px solid var(--border); border-radius: 4px; padding: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .review-stars { color: var(--brick); font-size: 0.95rem; letter-spacing: 2px; }
+  .review-text { font-size: 0.86rem; color: var(--ink); flex: 1; }
+  .review-author { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+  .review-author span { font-weight: 400; }
+  .reviews-cta { margin-top: 1.6rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .reviews-link { display: inline-block; background: var(--ink); color: var(--paper); padding: 0.65rem 1.5rem; border-radius: 2px; font-size: 0.88rem; font-weight: 700; text-decoration: none; }
+  .reviews-link:hover { background: var(--brick-dark); }
+  @media (max-width: 680px) { .reviews-grid { grid-template-columns: 1fr; } }
+
   @media (max-width: 680px) {
     .about-grid, .why-grid, .services-grid { grid-template-columns: 1fr; }
     .stats { grid-template-columns: 1fr 1fr; }
@@ -135,6 +148,7 @@
     <li><a href="#sluzby">Služby</a></li>
     <li><a href="#cenik">Ceník</a></li>
     <li><a href="#galerie">Fotky</a></li>
+    <li><a href="#recenze">Recenze</a></li>
     <li><a href="#proces">Jak postupuji</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
@@ -340,6 +354,33 @@
       <div class="why-card"><h3>35 let praxe</h3><p>Více než 35 let zkušeností s rekonstrukcemi bytů a domů v Jihomoravském kraji.</p></div>
       <div class="why-card"><h3>Vše písemně</h3><p>Rozsah prací, termíny i cena jsou dohodnuté písemně předem.</p></div>
       <div class="why-card"><h3>Úklid po sobě</h3><p>Po skončení práce prostor uklidíme – nezůstane vám hromada suti a prachu.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="reviews-section">
+  <div class="wrap" id="recenze" style="padding-top:0;padding-bottom:0;">
+    <div class="section-label">Recenze</div>
+    <h2>Co o nás říkají klienti</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">S prací pana Šmajdy a jeho kolegy jsme byli velmi spokojeni. Práce byla provedena velmi kvalitně, pečlivě a v dohodnutém termínu. Oceňujeme profesionální přístup, smysl pro detail a ochotu poradit.</div>
+        <div class="review-author">Jaroslava Antlová <span>· Google recenze</span></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Rekonstruovali mi se společníkem celý dům a byl jsem velmi spokojený s precizností práce, rychlou a vstřícnou domluvou a technickou zdatností v detailech, včetně návrhu řešení u nestandardů. Zodpovědný přístup, plně doporučuji.</div>
+        <div class="review-author">David Figar <span>· Google recenze</span></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Naprostá spokojenost!</div>
+        <div class="review-author">Markéta Nosková <span>· Google recenze</span></div>
+      </div>
+    </div>
+    <div class="reviews-cta">
+      <a href="https://maps.app.goo.gl/aqXWJapJDHMNCxCm9" target="_blank" rel="noopener" class="reviews-link">Zobrazit všechny recenze na Google →</a>
     </div>
   </div>
 </div>
