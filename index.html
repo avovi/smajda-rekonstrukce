@@ -4,139 +4,132 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Petr Šmajda – Rekonstrukce bytů a domů</title>
-<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --brick: #B5502E; --brick-dark: #8A3A1F; --brick-light: #FBEAE3;
-    --concrete: #6E6A60; --concrete-light: #EDEAE3;
-    --ink: #2A2622; --muted: #7A756C;
-    --paper: #FAF7F2; --white: #fff; --border: rgba(42,38,34,0.12);
-    --olive: #5F6B45; --olive-light: #EBEFE3;
+    --red: #D8231E; --red-dark: #A81813;
+    --ink: #131313; --ink-soft: #2A2A2A;
+    --muted: #6E6E6E; --line: rgba(19,19,19,0.12);
+    --paper: #FFFFFF; --smoke: #F4F4F4;
   }
+  html { scroll-behavior: smooth; }
   body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--paper); font-size: 15px; line-height: 1.6; }
-  h1, h2, h3, .nav-logo, .stat-card .num, .hours-card .time { font-family: 'Bitter', serif; }
+  h1, h2, h3, .nav-logo, .stat-num, .step-num { font-family: 'Archivo', sans-serif; }
 
-  nav { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 2rem; border-bottom: 3px solid var(--ink); position: sticky; top: 0; background: var(--paper); z-index: 100; }
-  .nav-logo { font-size: 1.25rem; font-weight: 900; color: var(--ink); letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.7rem; }
-  .nav-logo img { height: 42px; width: 42px; }
-  .nav-logo span { color: var(--brick); }
-  nav ul { list-style: none; display: flex; gap: 1.6rem; }
-  nav ul li a { text-decoration: none; color: var(--muted); font-size: 0.85rem; font-weight: 600; transition: color 0.2s; }
-  nav ul li a:hover { color: var(--brick); }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(8px); z-index: 100; }
+  .nav-logo { font-size: 1.1rem; font-weight: 800; color: var(--ink); letter-spacing: -0.3px; display: flex; align-items: center; gap: 0.7rem; text-transform: uppercase; }
+  .nav-logo img { height: 38px; width: 38px; }
+  .nav-logo span { color: var(--red); }
+  nav ul { list-style: none; display: flex; gap: 1.7rem; }
+  nav ul li a { text-decoration: none; color: var(--muted); font-size: 0.82rem; font-weight: 600; transition: color 0.15s; text-transform: uppercase; letter-spacing: 0.5px; }
+  nav ul li a:hover { color: var(--red); }
 
   /* HERO */
-  .hero { position: relative; padding: 4rem 2rem 3rem; text-align: center; overflow: hidden; background: var(--ink); color: var(--paper); }
-  .hero-bg { position: absolute; inset: 0; opacity: 0.18; background-image:
-      repeating-linear-gradient(0deg, transparent 0 38px, rgba(250,247,242,0.5) 38px 40px),
-      repeating-linear-gradient(90deg, transparent 0 76px, rgba(250,247,242,0.35) 76px 78px);
-    pointer-events: none; }
-  .hero-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
-  .hero-logo { width: 120px; height: 120px; margin: 0 auto 1.2rem; display: block; border-radius: 50%; background: var(--paper); padding: 8px; }
-  .hero-badge { background: var(--brick); color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1.2rem; display: inline-block; }
-  .hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1.08; margin-bottom: 1rem; letter-spacing: -1px; }
-  .hero h1 span { color: var(--brick); }
-  .hero p { color: rgba(250,247,242,0.75); font-size: 1rem; margin-bottom: 1.8rem; max-width: 480px; margin-left: auto; margin-right: auto; }
-  .btn-primary { background: var(--brick); color: #fff; border: 2px solid var(--brick); padding: 0.75rem 1.9rem; border-radius: 2px; font-size: 0.92rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-block; font-family: 'Inter', sans-serif; }
-  .btn-primary:hover { background: transparent; color: #fff; }
+  .hero { position: relative; padding: 6rem 2rem 5rem; overflow: hidden; background: var(--ink); color: var(--paper); }
+  .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 45%; height: 100%; background: var(--red); clip-path: polygon(35% 0, 100% 0, 100% 100%, 0% 100%); opacity: 0.92; }
+  .hero-content { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; }
+  .hero-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--paper); border: 1px solid rgba(255,255,255,0.4); padding: 0.35rem 0.9rem; margin-bottom: 1.6rem; }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 900; line-height: 0.98; margin-bottom: 1.3rem; letter-spacing: -1.5px; text-transform: uppercase; max-width: 640px; }
+  .hero h1 span { color: var(--red); }
+  .hero::before { z-index: 0; }
+  @media (max-width: 720px) { .hero::before { display: none; } }
+  .hero p { color: rgba(255,255,255,0.78); font-size: 1.05rem; margin-bottom: 2rem; max-width: 480px; }
+  .btn-primary { background: var(--red); color: #fff; border: 2px solid var(--red); padding: 0.85rem 2rem; font-size: 0.88rem; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.15s; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; }
+  .btn-primary:hover { background: var(--red-dark); border-color: var(--red-dark); }
 
-  .wrap { max-width: 880px; margin: 0 auto; padding: 3rem 2rem; }
-  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--brick); margin-bottom: 0.5rem; }
-  h2 { font-size: 1.7rem; font-weight: 900; color: var(--ink); margin-bottom: 1rem; line-height: 1.2; letter-spacing: -0.5px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 4.5rem 2rem; }
+  .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::before { content: ''; width: 28px; height: 2px; background: var(--red); }
+  h2 { font-size: clamp(1.7rem, 3vw, 2.2rem); font-weight: 800; color: var(--ink); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.8px; text-transform: uppercase; }
+  .lead { color: var(--muted); font-size: 1rem; }
 
   /* O MNE */
-  .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2.5rem; align-items: center; margin-top: 1.3rem; }
-  .about-text p { color: var(--muted); margin-bottom: 0.7rem; font-size: 0.95rem; }
-  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
-  .stat-card { background: var(--brick-light); border-radius: 4px; padding: 1rem; text-align: center; border: 1px solid var(--border); }
-  .stat-card .num { font-size: 1.8rem; font-weight: 900; color: var(--brick-dark); display: block; letter-spacing: -1px; }
-  .stat-card .lbl { font-size: 0.74rem; color: var(--muted); font-weight: 500; }
+  .about-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 3rem; align-items: center; margin-top: 1.6rem; }
+  .about-text p { color: var(--ink-soft); margin-bottom: 0.9rem; font-size: 1rem; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .stat-card { background: var(--paper); padding: 1.4rem 1rem; text-align: center; }
+  .stat-num { font-size: 2rem; font-weight: 900; color: var(--ink); display: block; letter-spacing: -1px; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-num em { color: var(--red); font-style: normal; }
+  .stat-lbl { font-size: 0.74rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
 
   /* SLUZBY */
-  .services-section { background: var(--concrete-light); padding: 3rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.4rem; }
-  .service-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 1.2rem 1.3rem; border-left: 4px solid var(--brick); }
-  .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--ink); font-family: 'Inter', sans-serif; }
-  .service-card p { font-size: 0.85rem; color: var(--muted); }
-
-  /* CENIK */
-  .price-table { width: 100%; border-collapse: collapse; margin-top: 1.4rem; background: var(--white); border: 1px solid var(--border); table-layout: fixed; }
-  .price-table thead tr { background: var(--ink); color: var(--paper); }
-  .price-table thead th { padding: 0.7rem 1rem; text-align: left; font-size: 0.8rem; font-weight: 600; }
-  .price-table thead th:not(:first-child) { text-align: right; width: 150px; }
-  .price-table tbody tr { border-bottom: 1px solid var(--border); }
-  .price-table tbody tr:last-child { border-bottom: none; }
-  .price-table tbody tr:nth-child(even) { background: var(--concrete-light); }
-  .price-table tbody td { padding: 0.6rem 1rem; font-size: 0.88rem; }
-  .price-table tbody td:not(:first-child) { text-align: right; font-weight: 700; color: var(--brick-dark); font-family: 'Bitter', serif; }
-  .price-table tbody td.tbd { color: var(--muted); font-weight: 500; font-style: italic; font-family: 'Inter', sans-serif; text-transform: lowercase; letter-spacing: 0.5px; }
-  .price-note { margin-top: 0.8rem; font-size: 0.82rem; color: var(--muted); }
+  .services-section { background: var(--ink); color: var(--paper); padding: 4.5rem 0; }
+  .services-section .section-label { color: var(--red); }
+  .services-section h2 { color: var(--paper); }
+  .services-intro { color: rgba(255,255,255,0.78); font-size: 1.1rem; max-width: 620px; margin-bottom: 2rem; line-height: 1.55; }
+  .services-intro strong { color: var(--paper); font-weight: 700; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+  .service-tag { border: 1px solid rgba(255,255,255,0.25); padding: 0.6rem 1.1rem; font-size: 0.9rem; font-weight: 600; color: var(--paper); }
+  .service-tag::before { content: '— '; color: var(--red); font-weight: 700; }
 
   /* GALERIE */
-  .gallery-section { background: var(--concrete-light); padding: 3rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .gallery-grid { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 1.4rem; }
-  .gallery-pair { background: var(--white); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-  .gallery-pair-imgs { display: grid; grid-template-columns: 1fr 1fr; }
-  .gallery-photo { position: relative; aspect-ratio: 4 / 3; background: var(--concrete-light); overflow: hidden; }
-  .gallery-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .gallery-tag { position: absolute; top: 0.6rem; left: 0.6rem; background: var(--ink); color: var(--paper); font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 2px; font-family: 'Inter', sans-serif; }
-  .gallery-photo.after .gallery-tag { background: var(--brick); }
+  .gallery-section { background: var(--smoke); padding: 4.5rem 0; }
+  .gallery-grid { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 1.8rem; }
+  .gallery-pair { background: var(--paper); border: 1px solid var(--line); overflow: hidden; }
+  .gallery-pair-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
+  .gallery-photo { position: relative; aspect-ratio: 4 / 3; background: var(--smoke); overflow: hidden; }
+  .gallery-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .gallery-tag { position: absolute; top: 0; left: 0; background: var(--ink); color: var(--paper); font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 0.3rem 0.75rem; }
+  .gallery-photo.after .gallery-tag { background: var(--red); }
   .gallery-photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.8rem; text-align: center; padding: 1rem; }
-  .gallery-caption { padding: 0.8rem 1.1rem; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--border); }
+  .gallery-caption { padding: 0.9rem 1.2rem; font-size: 0.86rem; color: var(--muted); }
   .gallery-caption strong { color: var(--ink); }
   @media (max-width: 560px) { .gallery-pair-imgs { grid-template-columns: 1fr; } }
 
   /* PROCES */
-  .process-section { background: var(--white); padding: 3rem 0; }
-  .process-steps { margin-top: 1.6rem; display: flex; flex-direction: column; gap: 0; }
-  .process-step { display: grid; grid-template-columns: 70px 1fr; gap: 1.2rem; padding: 1.1rem 0; border-top: 1px solid var(--border); }
+  .process-section { background: var(--paper); padding: 4.5rem 0; }
+  .process-steps { margin-top: 2rem; display: flex; flex-direction: column; }
+  .process-step { display: grid; grid-template-columns: 64px 1fr; gap: 1.4rem; padding: 1.4rem 0; border-top: 1px solid var(--line); align-items: start; }
   .process-steps .process-step:first-child { border-top: none; }
-  .process-step .step-num { font-size: 2.2rem; font-weight: 900; color: var(--brick-light); line-height: 1; font-family: 'Bitter', serif; -webkit-text-stroke: 2px var(--brick); color: transparent; }
-  .process-step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; font-family: 'Inter', sans-serif; }
-  .process-step p { font-size: 0.88rem; color: var(--muted); }
+  .process-step .step-num { font-size: 1.5rem; font-weight: 900; color: var(--red); line-height: 1.2; }
+  .process-step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.3px; }
+  .process-step p { font-size: 0.92rem; color: var(--muted); }
 
   /* PROC JA */
-  .why-section { background: var(--olive-light); padding: 3rem 0; }
-  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.4rem; }
-  .why-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 1.2rem; }
-  .why-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--olive); font-family: 'Inter', sans-serif; }
-  .why-card p { font-size: 0.82rem; color: var(--muted); }
-
-  /* KONTAKT */
-  .contact-section { background: var(--ink); color: var(--paper); padding: 3.5rem 2rem; text-align: center; position: relative; overflow: hidden; }
-  .contact-section::before { content: ''; position: absolute; inset: 0; opacity: 0.15; background-image: repeating-linear-gradient(45deg, transparent 0 18px, rgba(250,247,242,0.4) 18px 19px); pointer-events: none; }
-  .contact-content { position: relative; z-index: 1; }
-  .contact-section .section-label { color: var(--brick); }
-  .contact-section h2 { color: var(--paper); margin: 0 auto 0.7rem; max-width: 460px; }
-  .contact-section p { color: rgba(250,247,242,0.7); max-width: 400px; margin: 0 auto 1.7rem; font-size: 0.95rem; }
-  .contact-links { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
-  .btn-white { background: var(--paper); color: var(--ink); border: 2px solid var(--paper); padding: 0.75rem 1.9rem; border-radius: 2px; font-size: 0.92rem; font-weight: 700; cursor: pointer; text-decoration: none; font-family: 'Inter', sans-serif; }
-  .btn-outline-white { background: transparent; color: var(--paper); border: 2px solid rgba(250,247,242,0.35); padding: 0.75rem 1.9rem; border-radius: 2px; font-size: 0.92rem; font-weight: 700; cursor: pointer; text-decoration: none; font-family: 'Inter', sans-serif; }
-  .contact-meta { margin-top: 1.6rem; font-size: 0.88rem; color: rgba(250,247,242,0.6); }
-  .contact-meta a { color: var(--paper); text-decoration: none; font-weight: 600; border-bottom: 1px solid rgba(250,247,242,0.35); }
-  .contact-meta a:hover { border-color: var(--paper); }
-
-  footer { text-align: center; padding: 1.2rem; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--border); background: var(--paper); }
-  footer .legal { margin-top: 0.4rem; font-size: 0.72rem; color: var(--muted); opacity: 0.8; }
+  .why-section { background: var(--smoke); padding: 4.5rem 0; }
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 1.8rem; background: var(--line); border: 1px solid var(--line); }
+  .why-card { background: var(--paper); padding: 1.5rem 1.4rem; }
+  .why-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--ink); font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.3px; }
+  .why-card h3::before { content: ''; display: inline-block; width: 18px; height: 3px; background: var(--red); margin-right: 0.5rem; vertical-align: middle; }
+  .why-card p { font-size: 0.86rem; color: var(--muted); }
 
   /* RECENZE */
-  .reviews-section { background: var(--white); padding: 3rem 0; }
-  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.4rem; }
-  .review-card { background: var(--brick-light); border: 1px solid var(--border); border-radius: 4px; padding: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
-  .review-stars { color: var(--brick); font-size: 0.95rem; letter-spacing: 2px; }
-  .review-text { font-size: 0.86rem; color: var(--ink); flex: 1; }
-  .review-author { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
-  .review-author span { font-weight: 400; }
-  .reviews-cta { margin-top: 1.6rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .reviews-link { display: inline-block; background: var(--ink); color: var(--paper); padding: 0.65rem 1.5rem; border-radius: 2px; font-size: 0.88rem; font-weight: 700; text-decoration: none; }
-  .reviews-link:hover { background: var(--brick-dark); }
+  .reviews-section { background: var(--paper); padding: 4.5rem 0; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.8rem; }
+  .review-card { background: var(--smoke); border-left: 3px solid var(--red); padding: 1.4rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .review-stars { color: var(--red); font-size: 0.95rem; letter-spacing: 2px; }
+  .review-text { font-size: 0.88rem; color: var(--ink-soft); flex: 1; line-height: 1.55; }
+  .review-author { font-size: 0.8rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
+  .review-author span { font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .reviews-cta { margin-top: 1.8rem; }
+  .reviews-link { display: inline-block; color: var(--ink); padding: 0.4rem 0; font-size: 0.86rem; font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--red); text-transform: uppercase; letter-spacing: 0.5px; }
+  .reviews-link:hover { color: var(--red); }
   @media (max-width: 680px) { .reviews-grid { grid-template-columns: 1fr; } }
 
+  /* KONTAKT */
+  .contact-section { background: var(--red); color: #fff; padding: 4.5rem 2rem; text-align: center; }
+  .contact-section .section-label { color: #fff; justify-content: center; }
+  .contact-section .section-label::before { background: #fff; }
+  .contact-section h2 { color: #fff; margin: 0 auto 0.8rem; max-width: 520px; }
+  .contact-section p { color: rgba(255,255,255,0.88); max-width: 440px; margin: 0 auto 2rem; font-size: 1rem; }
+  .contact-links { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
+  .btn-white { background: #fff; color: var(--ink); border: 2px solid #fff; padding: 0.85rem 1.9rem; font-size: 0.9rem; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; }
+  .btn-white:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .btn-outline-white { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); padding: 0.85rem 1.9rem; font-size: 0.9rem; font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; }
+  .btn-outline-white:hover { border-color: #fff; }
+  .contact-meta { margin-top: 2rem; font-size: 0.86rem; color: rgba(255,255,255,0.8); }
+  .contact-meta a { color: #fff; text-decoration: none; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.5); }
+  .contact-meta a:hover { border-color: #fff; }
+
+  footer { text-align: center; padding: 1.6rem; font-size: 0.78rem; color: var(--muted); border-top: 1px solid var(--line); background: var(--ink); color: rgba(255,255,255,0.7); }
+  footer .legal { margin-top: 0.4rem; font-size: 0.72rem; opacity: 0.7; }
+
   @media (max-width: 680px) {
-    .about-grid, .why-grid, .services-grid { grid-template-columns: 1fr; }
+    .about-grid, .why-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
     .stats { grid-template-columns: 1fr 1fr; }
     nav ul { display: none; }
-    .price-table thead th:not(:first-child), .price-table tbody td:not(:first-child) { width: auto; }
   }
 </style>
 </head>
@@ -147,38 +140,35 @@
   <ul>
     <li><a href="#o-mne">O mně</a></li>
     <li><a href="#sluzby">Služby</a></li>
-    <li><a href="#cenik">Ceník</a></li>
     <li><a href="#galerie">Fotky</a></li>
     <li><a href="#recenze">Recenze</a></li>
-    <li><a href="#proces">Jak postupuji</a></li>
+    <li><a href="#proces">Postup</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
 </nav>
 
 <div class="hero">
-  <div class="hero-bg"></div>
   <div class="hero-content">
-    <img src="logo.jpg" alt="Logo Petr Šmajda Rekonstrukce" class="hero-logo">
-    <span class="hero-badge">📍 Jihomoravský kraj</span>
-    <h1>Vaše bydlení, <span>nově od základů</span></h1>
-    <p>Rekonstrukce bytů a domů s více než 35 lety zkušeností. Důraz klademe na poctivě odvedenou práci, detail a čistotu realizace.</p>
-    <a href="#kontakt" class="btn-primary">Nezávazná poptávka →</a>
+    <span class="hero-badge">Rekonstrukce · Jihomoravský kraj</span>
+    <h1>Váš domov,<br><span>nově od základů</span></h1>
+    <p>Rekonstrukce bytů a domů s více než 35 lety zkušeností. Postarám se o vše od první obhlídky až po předání uklizeného bytu – vy se jen nastěhujete.</p>
+    <a href="#kontakt" class="btn-primary">Chci nezávaznou nabídku</a>
   </div>
 </div>
 
 <div class="wrap" id="o-mne">
   <div class="section-label">O mně</div>
-  <h2>Petr Šmajda – rekonstrukce s více než 35 lety zkušeností</h2>
+  <h2>Rekonstrukce, na kterou se spolehnete</h2>
   <div class="about-grid">
     <div class="about-text">
-      <p>Rekonstrukcím bytů a domů se věnuji více než 35 let. Za tu dobu jsem prošel desítkami realizací po celém Jihomoravském kraji – od drobných úprav koupelen až po kompletní rekonstrukce rodinných domů.</p>
-      <p>Většinu práce odvádím osobně. Na specializované obory, jako je elektroinstalace, vodoinstalace nebo obklady, spolupracuji s prověřenými řemeslníky, se kterými jsem v kontaktu dlouhá léta – za výsledek ale ručím a celou zakázku mám pod osobním dohledem.</p>
+      <p>Jmenuji se Petr Šmajda a rekonstrukcím bytů a domů se věnuji více než 35 let. Za tu dobu jsem pomohl desítkám rodin proměnit jejich bydlení – od menší úpravy až po kompletní rekonstrukci celého domu.</p>
+      <p>Většinu práce odvádím osobně. Na obory jako elektroinstalace, voda nebo obklady mám prověřené řemeslníky, se kterými spolupracuji dlouhá léta. Vy řešíte všechno se mnou na jednom místě – za výsledek ručím já.</p>
     </div>
     <div class="stats">
-      <div class="stat-card"><span class="num">35+</span><span class="lbl">let zkušeností</span></div>
-      <div class="stat-card"><span class="num">JMK</span><span class="lbl">Jihomoravský kraj</span></div>
-      <div class="stat-card"><span class="num">100%</span><span class="lbl">poctivá práce</span></div>
-      <div class="stat-card"><span class="num">∅</span><span class="lbl">žádné kompromisy v detailu</span></div>
+      <div class="stat-card"><span class="stat-num">35<em>+</em></span><span class="stat-lbl">let zkušeností</span></div>
+      <div class="stat-card"><span class="stat-num">JMK</span><span class="stat-lbl">Jihomoravský kraj</span></div>
+      <div class="stat-card"><span class="stat-num">1<em>×</em></span><span class="stat-lbl">kontakt na vše</span></div>
+      <div class="stat-card"><span class="stat-num">100<em>%</em></span><span class="stat-lbl">poctivá práce</span></div>
     </div>
   </div>
 </div>
@@ -186,62 +176,27 @@
 <div class="services-section">
   <div class="wrap" id="sluzby" style="padding-top:0;padding-bottom:0;">
     <div class="section-label">Co dělám</div>
-    <h2>Služby</h2>
-    <div class="services-grid">
-      <div class="service-card">
-        <h3>Rekonstrukce koupelen</h3>
-        <p>Bourání, nové rozvody vody a odpadů, obklady, dlažba, sanita na klíč.</p>
-      </div>
-      <div class="service-card">
-        <h3>Rekonstrukce bytů</h3>
-        <p>Dispoziční úpravy, nové podlahy, malby, dveře, kompletní renovace bytového jádra.</p>
-      </div>
-      <div class="service-card">
-        <h3>Rekonstrukce rodinných domů</h3>
-        <p>Komplexní renovace interiéru i exteriéru, zateplení, fasády, výměna oken.</p>
-      </div>
-      <div class="service-card">
-        <h3>Elektroinstalace a rozvody</h3>
-        <p>Nové elektrické rozvody, zásuvky, světla – vždy přes prověřeného elektrikáře s revizí.</p>
-      </div>
-      <div class="service-card">
-        <h3>Podlahy a obklady</h3>
-        <p>Pokládka dlažby, plovoucích podlah, vinylu, obklady kuchyní a koupelen.</p>
-      </div>
-      <div class="service-card">
-        <h3>Malby a štuky</h3>
-        <p>Vyrovnání stěn, štukování, malování, dekorativní omítky.</p>
-      </div>
+    <h2>Kompletní rekonstrukce bytů a domů</h2>
+    <p class="services-intro">Děláte rekonstrukci bytu nebo domu? <strong>Postarám se o všechno.</strong> Nemusíte shánět zvlášť obkladače, elektrikáře ani malíře – vše vyřešíte na jednom místě se mnou.</p>
+    <div class="service-tags">
+      <span class="service-tag">Koupelny</span>
+      <span class="service-tag">Kuchyně</span>
+      <span class="service-tag">Bytová jádra</span>
+      <span class="service-tag">Elektroinstalace</span>
+      <span class="service-tag">Voda a odpady</span>
+      <span class="service-tag">Podlahy</span>
+      <span class="service-tag">Obklady a dlažby</span>
+      <span class="service-tag">Malby a štuky</span>
+      <span class="service-tag">Bourací práce</span>
     </div>
   </div>
-</div>
-
-<div class="wrap" id="cenik">
-  <div class="section-label">Ceník</div>
-  <h2>Orientační ceny</h2>
-  <p style="color:var(--muted);font-size:0.9rem;">Konečná cena se odvíjí od rozsahu prací a stavu objektu. Po osobní obhlídce dostanete písemnou nabídku zdarma.</p>
-  <table class="price-table">
-    <thead><tr><th>Služba</th><th>Orientační cena</th></tr></thead>
-    <tbody>
-      <tr><td>Osobní obhlídka a nezávazná nabídka</td><td class="tbd">připravujeme</td></tr>
-      <tr><td>Rekonstrukce koupelny (na klíč, malý byt)</td><td class="tbd">připravujeme</td></tr>
-      <tr><td>Rekonstrukce koupelny (na klíč, velký rozsah)</td><td class="tbd">připravujeme</td></tr>
-      <tr><td>Pokládka dlažby / obkladu</td><td class="tbd">připravujeme</td></tr>
-      <tr><td>Pokládka plovoucí podlahy</td><td class="tbd">připravujeme</td></tr>
-      <tr><td>Malování + drobné štuky</td><td class="tbd">připravujeme</td></tr>
-      <tr><td>Bourací práce a odvoz suti</td><td class="tbd">připravujeme</td></tr>
-      <tr><td>Kompletní rekonstrukce bytu (2+kk)</td><td class="tbd">připravujeme</td></tr>
-      <tr><td>Drobné opravy a údržba</td><td class="tbd">připravujeme</td></tr>
-    </tbody>
-  </table>
-  <p class="price-note">* Ceník právě připravujeme. Pro orientační cenu vaší zakázky nás kontaktujte – po osobní obhlídce vám zpracujeme nabídku zdarma.</p>
 </div>
 
 <div class="gallery-section">
   <div class="wrap" id="galerie" style="padding-top:0;padding-bottom:0;">
     <div class="section-label">Naše práce</div>
     <h2>Před a po</h2>
-    <p style="color:var(--muted);font-size:0.9rem;">Ukázky z realizovaných zakázek. Fotky postupně doplňujeme.</p>
+    <p class="lead">Ukázky z dokončených rekonstrukcí. Fotky postupně doplňujeme.</p>
     <div class="gallery-grid">
 
       <div class="gallery-pair">
@@ -291,13 +246,10 @@
 </div>
 
 <script>
-  // Pro každý obrázek galerie zkusíme více přípon (jpg, JPG, jpeg, JPEG, png, PNG, webp).
-  // Pokud žádná neexistuje, zobrazíme placeholder "doplníme".
   document.querySelectorAll('#galerie img[data-base]').forEach(function (img) {
     var base = img.getAttribute('data-base');
     var exts = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'webp'];
     var i = 0;
-
     function tryNext() {
       if (i >= exts.length) {
         var ph = document.createElement('div');
@@ -309,7 +261,6 @@
       img.src = base + '.' + exts[i];
       i++;
     }
-
     img.addEventListener('error', tryNext);
     tryNext();
   });
@@ -318,27 +269,27 @@
 <div class="process-section">
   <div class="wrap" id="proces" style="padding-top:0;padding-bottom:0;">
     <div class="section-label">Jak to probíhá</div>
-    <h2>Postup zakázky krok za krokem</h2>
+    <h2>Od telefonátu po klíče v ruce</h2>
     <div class="process-steps">
       <div class="process-step">
         <div class="step-num">01</div>
-        <div><h3>Telefonát nebo e-mail</h3><p>Popíšete mi, co chcete udělat. Domluvíme si termín obhlídky – zpravidla do týdne.</p></div>
+        <div><h3>Ozvete se mi</h3><p>Zavoláte nebo napíšete, co byste chtěli udělat. Domluvíme si termín obhlídky – zpravidla do týdne.</p></div>
       </div>
       <div class="process-step">
         <div class="step-num">02</div>
-        <div><h3>Obhlídka a nabídka</h3><p>Přijedu se podívat na místo, probereme rozsah prací a do pár dní dostanete písemnou nabídku zdarma.</p></div>
+        <div><h3>Přijedu a navrhnu řešení</h3><p>Podívám se na místo, probereme vaše představy a do pár dní dostanete písemnou nabídku zdarma.</p></div>
       </div>
       <div class="process-step">
         <div class="step-num">03</div>
-        <div><h3>Harmonogram a smlouva</h3><p>Domluvíme termín začátku a délku prací. Vše písemně, žádné dohody jen na slovo.</p></div>
+        <div><h3>Domluvíme termín</h3><p>Stanovíme začátek i délku prací. Vše písemně, žádné dohody jen na slovo.</p></div>
       </div>
       <div class="process-step">
         <div class="step-num">04</div>
-        <div><h3>Realizace</h3><p>Práce provádím osobně, na ostatní řemesla mám prověřené kontakty. Pravidelně vás informuji o průběhu a případných změnách.</p></div>
+        <div><h3>Pustíme se do práce</h3><p>Pracuji osobně, na ostatní řemesla mám prověřené lidi. Průběžně vás informuji o postupu.</p></div>
       </div>
       <div class="process-step">
         <div class="step-num">05</div>
-        <div><h3>Předání a úklid</h3><p>Po dokončení prostor uklidíme, společně zkontrolujeme výsledek a předáme klíče.</p></div>
+        <div><h3>Předám hotovo a uklidím</h3><p>Po dokončení vše uklidíme, společně zkontrolujeme výsledek a předáme klíče.</p></div>
       </div>
     </div>
   </div>
@@ -346,15 +297,15 @@
 
 <div class="why-section">
   <div class="wrap" id="proc-ja" style="padding-top:0;padding-bottom:0;">
-    <div class="section-label">Proč já?</div>
-    <h2>Co získáte</h2>
+    <div class="section-label">Proč já</div>
+    <h2>Co u mě získáte</h2>
     <div class="why-grid">
-      <div class="why-card"><h3>Vše pod jednou střechou</h3><p>Nemusíte si hledat vlastního elektrikáře, obkladače ani malíře – mám na ně prověřené kontakty.</p></div>
-      <div class="why-card"><h3>Reálné termíny</h3><p>Slibuji jen to, co dokážu dodržet. Žádné nekonečné odsouvání zakázky.</p></div>
-      <div class="why-card"><h3>Nabídka zdarma</h3><p>Obhlídka a vyčíslení rozsahu prací nic nestojí, ani když si zakázku nakonec nezadáte.</p></div>
-      <div class="why-card"><h3>35 let praxe</h3><p>Více než 35 let zkušeností s rekonstrukcemi bytů a domů v Jihomoravském kraji.</p></div>
-      <div class="why-card"><h3>Vše písemně</h3><p>Rozsah prací, termíny i cena jsou dohodnuté písemně předem.</p></div>
-      <div class="why-card"><h3>Úklid po sobě</h3><p>Po skončení práce prostor uklidíme – nezůstane vám hromada suti a prachu.</p></div>
+      <div class="why-card"><h3>Vše na jednom místě</h3><p>Nemusíte shánět vlastního elektrikáře ani obkladače – mám na ně prověřené lidi.</p></div>
+      <div class="why-card"><h3>Reálné termíny</h3><p>Slíbím jen to, co dokážu dodržet. Žádné nekonečné odkládání.</p></div>
+      <div class="why-card"><h3>Nabídka zdarma</h3><p>Obhlídka a vyčíslení vás nic nestojí, ani když si práci nakonec nezadáte.</p></div>
+      <div class="why-card"><h3>35 let praxe</h3><p>Přes 35 let zkušeností s rekonstrukcemi bytů a domů na jižní Moravě.</p></div>
+      <div class="why-card"><h3>Vše písemně</h3><p>Rozsah prací, termín i cena jsou domluvené písemně předem.</p></div>
+      <div class="why-card"><h3>Uklidíme po sobě</h3><p>Nezůstane vám hromada suti a prachu – prostor předáme čistý.</p></div>
     </div>
   </div>
 </div>
@@ -362,7 +313,7 @@
 <div class="reviews-section">
   <div class="wrap" id="recenze" style="padding-top:0;padding-bottom:0;">
     <div class="section-label">Recenze</div>
-    <h2>Co o nás říkají klienti</h2>
+    <h2>Co říkají klienti</h2>
     <div class="reviews-grid">
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
@@ -371,7 +322,7 @@
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">Rekonstruovali mi se společníkem celý dům a byl jsem velmi spokojený s precizností práce, rychlou a vstřícnou domluvou a technickou zdatností v detailech, včetně návrhu řešení u nestandardů. Zodpovědný přístup, plně doporučuji.</div>
+        <div class="review-text">Rekonstruovali mi se společníkem celý dům a byl jsem velmi spokojený s precizností práce, rychlou a vstřícnou domluvou a technickou zdatností v detailech, včetně návrhu řešení u nestandardů. Plně doporučuji.</div>
         <div class="review-author">David Figar <span>· Google recenze</span></div>
       </div>
       <div class="review-card">
@@ -381,7 +332,7 @@
       </div>
     </div>
     <div class="reviews-cta">
-      <a href="https://maps.app.goo.gl/aqXWJapJDHMNCxCm9" target="_blank" rel="noopener" class="reviews-link">Zobrazit všechny recenze na Google →</a>
+      <a href="https://maps.app.goo.gl/aqXWJapJDHMNCxCm9" target="_blank" rel="noopener" class="reviews-link">Všechny recenze na Google →</a>
     </div>
   </div>
 </div>
@@ -390,7 +341,7 @@
   <div class="contact-content">
     <div class="section-label">Kontakt</div>
     <h2>Plánujete rekonstrukci?</h2>
-    <p>Pro nezávaznou poptávku nás kontaktujte telefonicky nebo e-mailem.</p>
+    <p>Napište nebo zavolejte. Nabídka po obhlídce je zdarma a k ničemu vás nezavazuje.</p>
     <div class="contact-links">
       <a href="tel:+420604611485" class="btn-white">📞 +420 604 611 485</a>
       <a href="mailto:smajdap@seznam.cz" class="btn-outline-white">✉️ smajdap@seznam.cz</a>
