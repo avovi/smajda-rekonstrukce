@@ -79,17 +79,17 @@
   /* Hero slideshow – fotky PO se pomalu střídají a driftují */
   .hero-slides { position: absolute; inset: 0; z-index: 0; }
   .hero-slide { position: absolute; inset: -20px; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s var(--ease); animation: heroDrift 24s ease-in-out infinite alternate; }
-  .hero-slide.active { opacity: 0.28; }
+  .hero-slide.active { opacity: 0.45; }
   .hero-slide:nth-child(2) { animation-delay: -8s; animation-direction: alternate-reverse; }
   .hero-slide:nth-child(3) { animation-delay: -16s; }
   @keyframes heroDrift { 0% { transform: translate(0,0) scale(1.06); } 50% { transform: translate(-12px, 8px) scale(1.1); } 100% { transform: translate(6px, -6px) scale(1.06); } }
 
   /* Plovoucí bublinky v heru */
   .hero-bubbles { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .hero-bubbles span { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.05); animation: bubbleFloat linear infinite; }
+  .hero-bubbles span { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.12); animation: bubbleFloat linear infinite; }
   @keyframes bubbleFloat { 0% { transform: translateY(0) scale(1); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-110vh) scale(0.6); opacity: 0; } }
   /* tmavý a stranový závoj kvůli čitelnosti textu */
-  .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(105deg, rgba(15,14,12,0.92) 0%, rgba(15,14,12,0.78) 42%, rgba(15,14,12,0.45) 100%); }
+  .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(105deg, rgba(15,14,12,0.82) 0%, rgba(15,14,12,0.62) 42%, rgba(15,14,12,0.30) 100%); }
   .hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); z-index: 2; }
 
   .hero-content { position: relative; z-index: 3; max-width: 1040px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 3rem; }
@@ -105,8 +105,7 @@
   .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--paper); border: 1px solid rgba(255,255,255,0.35); padding: 0.4rem 0.95rem; margin-bottom: 1.6rem; border-radius: 100px; }
   .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 0 rgba(216,35,30,0.6); animation: pulseDot 2.4s ease-out infinite; }
   @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(216,35,30,0.55); } 100% { box-shadow: 0 0 0 9px rgba(216,35,30,0); } }
-  .hero h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); font-weight: 900; line-height: 0.98; margin-bottom: 1.3rem; letter-spacing: -1.5px; text-transform: uppercase; max-width: 680px; }
-  .hero h1 span { color: var(--red); }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); font-weight: 900; line-height: 0.98; margin-bottom: 1.3rem; letter-spacing: -1.5px; text-transform: uppercase; max-width: 680px; color: var(--paper); }
   .hero-rule { display: block; width: 72px; height: 5px; background: var(--red); border-radius: 4px; margin: -0.4rem 0 1.6rem; }
   .word { display: inline-block; overflow: hidden; vertical-align: top; }
   .word > i { display: inline-block; font-style: normal; transform: translateY(110%); animation: wordUp 0.8s var(--ease-out-expo) forwards; }
