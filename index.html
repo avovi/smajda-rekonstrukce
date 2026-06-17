@@ -56,7 +56,7 @@
   .mask-reveal { display: inline-block; position: relative; overflow: hidden; }
   .mask-reveal > span { display: inline-block; transform: translateY(105%); transition: transform 0.85s var(--ease-out-expo); }
   .mask-reveal.is-visible > span { transform: none; }
-  .mask-reveal::after { content: ''; position: absolute; inset: 0; background: var(--ink); transform: scaleX(0); transform-origin: left; }
+  .mask-reveal::after { content: ''; position: absolute; inset: 0; background: var(--red); transform: scaleX(0); transform-origin: left; }
   .mask-reveal.is-visible::after { animation: wipe 0.9s var(--ease-out-expo) forwards; }
   .mask-reveal.on-dark::after { background: var(--paper); }
   @keyframes wipe { 0% { transform: scaleX(0); transform-origin: left; } 50% { transform: scaleX(1); transform-origin: left; } 50.01% { transform-origin: right; } 100% { transform: scaleX(0); transform-origin: right; } }
@@ -76,8 +76,18 @@
 
   /* HERO – tmavý, s fotem PO jako tlumeným pozadím */
   .hero { position: relative; padding: 7rem 2rem 6rem; overflow: hidden; background: var(--ink); color: var(--paper); min-height: 78vh; display: flex; align-items: center; }
-  .hero-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s var(--ease); will-change: transform; }
-  .hero-bg.loaded { opacity: 0.32; }
+  /* Hero slideshow – fotky PO se pomalu střídají a driftují */
+  .hero-slides { position: absolute; inset: 0; z-index: 0; }
+  .hero-slide { position: absolute; inset: -20px; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s var(--ease); animation: heroDrift 24s ease-in-out infinite alternate; }
+  .hero-slide.active { opacity: 0.28; }
+  .hero-slide:nth-child(2) { animation-delay: -8s; animation-direction: alternate-reverse; }
+  .hero-slide:nth-child(3) { animation-delay: -16s; }
+  @keyframes heroDrift { 0% { transform: translate(0,0) scale(1.06); } 50% { transform: translate(-12px, 8px) scale(1.1); } 100% { transform: translate(6px, -6px) scale(1.06); } }
+
+  /* Plovoucí bublinky v heru */
+  .hero-bubbles { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .hero-bubbles span { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.05); animation: bubbleFloat linear infinite; }
+  @keyframes bubbleFloat { 0% { transform: translateY(0) scale(1); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-110vh) scale(0.6); opacity: 0; } }
   /* tmavý a stranový závoj kvůli čitelnosti textu */
   .hero::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(105deg, rgba(15,14,12,0.92) 0%, rgba(15,14,12,0.78) 42%, rgba(15,14,12,0.45) 100%); }
   .hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); z-index: 2; }
@@ -272,7 +282,12 @@
 </nav>
 
 <div class="hero">
-  <div class="hero-bg" id="heroBg" data-photo="after"></div>
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide" data-bg="1b"></div>
+    <div class="hero-slide" data-bg="2b"></div>
+    <div class="hero-slide" data-bg="3b"></div>
+  </div>
+  <div class="hero-bubbles" id="heroBubbles"></div>
   <div class="hero-accent"></div>
   <div class="hero-content">
     <div class="hero-text">
@@ -391,13 +406,61 @@
       tryNext();
     });
 
-    // Pozadí heru a kontaktu z fotek PO (1b, případně 2b, 3b). Když nejsou, zůstane čistá tmavá plocha.
-    function loadAfterBg(el) {
+    // Hero slideshow – každý slide zkusí načíst svou fotku PO, pak se automaticky střídají
+    var slides = document.querySelectorAll('.hero-slide[data-bg]');
+    var loadedSlides = [];
+    var slideIdx = 0;
+
+    function tryLoadSlide(slide) {
+      var base = slide.getAttribute('data-bg');
+      var si = 0;
+      function attempt() {
+        if (si >= exts.length) return; // foto neexistuje – slide zůstane skrytý
+        var test = new Image();
+        var url = base + '.' + exts[si];
+        test.onload = function () {
+          slide.style.backgroundImage = 'url("' + url + '")';
+          loadedSlides.push(slide);
+          if (loadedSlides.length === 1) { slide.classList.add('active'); startSlideshow(); }
+        };
+        test.onerror = function () { si++; attempt(); };
+        test.src = url;
+      }
+      attempt();
+    }
+    slides.forEach(tryLoadSlide);
+
+    function startSlideshow() {
+      if (loadedSlides.length <= 1) return;
+      setInterval(function () {
+        loadedSlides[slideIdx].classList.remove('active');
+        slideIdx = (slideIdx + 1) % loadedSlides.length;
+        loadedSlides[slideIdx].classList.add('active');
+      }, 5000);
+    }
+
+    // Bublinky v heru
+    var bb = document.getElementById('heroBubbles');
+    if (bb) {
+      for (var b = 0; b < 18; b++) {
+        var s = document.createElement('span');
+        var size = 20 + Math.random() * 80;
+        s.style.width = s.style.height = size + 'px';
+        s.style.left = (Math.random() * 100) + '%';
+        s.style.bottom = (-size) + 'px';
+        s.style.animationDuration = (12 + Math.random() * 18) + 's';
+        s.style.animationDelay = (Math.random() * 14) + 's';
+        bb.appendChild(s);
+      }
+    }
+
+    // Kontakt pozadí – první nalezená PO fotka
+    function loadContactBg(el) {
       if (!el) return;
       var bases = ['1b', '2b', '3b'];
       var bi = 0, ei = 0;
       function attempt() {
-        if (bi >= bases.length) return; // žádné foto – necháme tmavé pozadí
+        if (bi >= bases.length) return;
         var test = new Image();
         var url = bases[bi] + '.' + exts[ei];
         test.onload = function () {
@@ -413,8 +476,7 @@
       }
       attempt();
     }
-    loadAfterBg(document.getElementById('heroBg'));
-    loadAfterBg(document.getElementById('contactBg'));
+    loadContactBg(document.getElementById('contactBg'));
   })();
 </script>
 
@@ -537,14 +599,14 @@
   var nav = document.getElementById('nav');
   var toTop = document.getElementById('toTop');
   var progress = document.getElementById('progress');
-  var heroBg = document.getElementById('heroBg');
+  var heroSlides = document.getElementById('heroSlides');
   function onScroll() {
     var y = window.scrollY;
     var h = document.documentElement.scrollHeight - window.innerHeight;
     nav.classList.toggle('scrolled', y > 8);
     toTop.classList.toggle('show', y > 600);
     progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
-    if (!reduce && heroBg && y < 900) heroBg.style.transform = 'translateY(' + (y * 0.15) + 'px) scale(1.05)';
+    if (!reduce && heroSlides && y < 900) heroSlides.style.transform = 'translateY(' + (y * 0.12) + 'px)';
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
