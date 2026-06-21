@@ -95,13 +95,13 @@
   .hero-content { position: relative; z-index: 3; max-width: 1040px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 3rem; }
   .hero-text { flex: 1; min-width: 0; }
   .hero-logo-wrap { flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-  .hero-logo-disc { width: 210px; height: 210px; border-radius: 50%; background: rgba(255,255,255,0.97); display: flex; align-items: center; justify-content: center; box-shadow: 0 26px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.5); position: relative; animation: discFloat 6s ease-in-out infinite alternate; }
+  .hero-logo-disc { width: 210px; height: 210px; border-radius: 50%; background: rgba(255,255,255,0.97); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 26px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.5); position: relative; animation: discFloat 6s ease-in-out infinite alternate; }
   .hero-logo-disc::before { content: ''; position: absolute; width: 250px; height: 250px; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.4); animation: spinSlow 30s linear infinite; }
   .hero-logo-disc::after { content: ''; position: absolute; width: 210px; height: 210px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.22); animation: pulseRing 3.2s ease-out infinite; }
   @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.55; } 100% { transform: scale(1.28); opacity: 0; } }
   @keyframes discFloat { from { transform: translateY(-9px); } to { transform: translateY(11px); } }
   @keyframes spinSlow { to { transform: rotate(360deg); } }
-  .hero-logo { max-width: 134px; height: auto; display: block; position: relative; z-index: 2; }
+  .hero-logo { max-width: 134px; height: auto; display: block; position: relative; z-index: 2; margin: 0 auto; }
   .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--paper); border: 1px solid rgba(255,255,255,0.35); padding: 0.4rem 0.95rem; margin-bottom: 1.6rem; border-radius: 100px; }
   .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 0 rgba(216,35,30,0.6); animation: pulseDot 2.4s ease-out infinite; }
   @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(216,35,30,0.55); } 100% { box-shadow: 0 0 0 9px rgba(216,35,30,0); } }
