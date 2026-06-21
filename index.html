@@ -45,16 +45,16 @@
   .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: var(--red); z-index: 200; transition: width 0.1s linear; }
 
   /* SCROLL REVEAL */
-  .reveal { opacity: 0; transform: translateY(34px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo); will-change: opacity, transform; }
   .reveal.is-visible { opacity: 1; transform: none; }
-  .reveal[data-delay="1"] { transition-delay: 0.09s; }
-  .reveal[data-delay="2"] { transition-delay: 0.18s; }
-  .reveal[data-delay="3"] { transition-delay: 0.27s; }
-  .reveal[data-delay="4"] { transition-delay: 0.36s; }
+  .reveal[data-delay="1"] { transition-delay: 0.1s; }
+  .reveal[data-delay="2"] { transition-delay: 0.2s; }
+  .reveal[data-delay="3"] { transition-delay: 0.3s; }
+  .reveal[data-delay="4"] { transition-delay: 0.4s; }
 
   /* MASK-REVEAL nadpisy – setření nyní v inkoustové barvě, ne červené */
   .mask-reveal { display: inline-block; position: relative; overflow: hidden; }
-  .mask-reveal > span { display: inline-block; transform: translateY(105%); transition: transform 0.85s var(--ease-out-expo); }
+  .mask-reveal > span { display: inline-block; transform: translateY(105%); transition: transform 1s var(--ease-out-expo); will-change: transform; }
   .mask-reveal.is-visible > span { transform: none; }
   .mask-reveal::after { content: ''; position: absolute; inset: 0; background: var(--red); transform: scaleX(0); transform-origin: left; }
   .mask-reveal.is-visible::after { animation: wipe 0.9s var(--ease-out-expo) forwards; }
@@ -169,8 +169,8 @@
   /* GALERIE (bílá) */
   .gallery-section { background: var(--paper); padding: 5.5rem 0; }
   .gallery-grid { display: flex; flex-direction: column; gap: 1.4rem; margin-top: 1.8rem; }
-  .gallery-pair { background: var(--paper); border: 1px solid var(--line); overflow: hidden; border-radius: 14px; box-shadow: var(--shadow-sm); transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease); }
-  .gallery-pair:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+  .gallery-pair { background: var(--paper); border: 1px solid var(--line); overflow: hidden; border-radius: 14px; box-shadow: var(--shadow-sm); transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo); will-change: transform; }
+  .gallery-pair:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
   .gallery-pair-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
   .gallery-photo { position: relative; aspect-ratio: 4 / 3; background: var(--sand); overflow: hidden; }
   .gallery-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.7s var(--ease); }
@@ -196,8 +196,8 @@
   /* PROC JA (bílá) */
   .why-section { background: var(--paper); padding: 5.5rem 0; }
   .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 1.8rem; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-sm); }
-  .why-card { background: var(--paper); padding: 1.7rem 1.4rem; transition: background 0.35s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease); position: relative; }
-  .why-card:hover { background: var(--sand); transform: translateY(-4px); box-shadow: var(--shadow-md); z-index: 2; }
+  .why-card { background: var(--paper); padding: 1.7rem 1.4rem; transition: background 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo); position: relative; will-change: transform; }
+  .why-card:hover { background: var(--sand); transform: translateY(-5px); box-shadow: var(--shadow-md); z-index: 2; }
   .why-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--ink); font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.3px; }
   .why-card h3::before { content: ''; display: inline-block; width: 18px; height: 3px; background: var(--red); margin-right: 0.5rem; vertical-align: middle; transition: width 0.35s var(--ease); }
   .why-card:hover h3::before { width: 32px; }
@@ -237,6 +237,9 @@
 
   footer { text-align: center; padding: 1.8rem; font-size: 0.78rem; color: rgba(255,255,255,0.7); border-top: 1px solid rgba(255,255,255,0.08); background: var(--ink); }
   footer .legal { margin-top: 0.4rem; font-size: 0.72rem; opacity: 0.7; }
+  footer .author { margin-top: 0.6rem; font-size: 0.72rem; opacity: 0.45; }
+  footer .author a { color: rgba(255,255,255,0.7); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); transition: color 0.3s var(--ease), border-color 0.3s var(--ease), opacity 0.3s var(--ease); }
+  footer .author a:hover { color: var(--red); border-color: var(--red); opacity: 1; }
 
   /* BACK TO TOP */
   .to-top { position: fixed; right: 1.5rem; bottom: 1.5rem; width: 48px; height: 48px; border-radius: 50%; background: var(--red); color: #fff; border: none; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow-red); opacity: 0; visibility: hidden; transform: translateY(14px); transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), background 0.3s var(--ease), visibility 0.4s; z-index: 140; }
@@ -555,6 +558,7 @@
 <footer>
   © 2026 Petr Šmajda – Rekonstrukce bytů a domů &nbsp;·&nbsp; smajdap@seznam.cz &nbsp;·&nbsp; +420 604 611 485
   <div class="legal">IČ: 62084852 &nbsp;·&nbsp; Podnikatel zapsaný v obchodním rejstříku &nbsp;·&nbsp; Jihomoravský kraj, Česká republika</div>
+  <div class="author">Web vytvořil <a href="https://avovi.github.io/ajtak-brno/" target="_blank" rel="noopener">Martin</a></div>
 </footer>
 
 <button class="to-top magnetic" id="toTop" aria-label="Nahoru">↑</button>
